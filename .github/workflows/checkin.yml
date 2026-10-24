@@ -1,0 +1,23 @@
+name: checkin
+on: 
+    schedule:
+        - cron: "0 0 * * *" 
+    workflow_dispatch:
+jobs:
+    checkin:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions-rust-lang/setup-rust-toolchain@v2
+            - name: checkin 1
+              env:
+                OS: ${{ secrets.OS }}
+                COOKIE: ${{ secrets.COOKIE }} 
+              run: |
+                cargo run
+            - name: checkin 2
+              env:
+                OS: ${{ secrets.OS }}
+                COOKIE: ${{ secrets.COOKIE2 }} 
+              run: |
+                cargo run
